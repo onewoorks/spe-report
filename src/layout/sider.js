@@ -1,6 +1,6 @@
 import React from "react"
 import { Layout, Menu } from "antd"
-import { UserOutlined } from '@ant-design/icons'
+import { UserOutlined, DashboardOutlined } from '@ant-design/icons'
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
@@ -28,6 +28,12 @@ class AppSider extends React.Component {
                         defaultSelectedKeys={[this.props.current_route]}
                         onClick={this.change_route}
                     >
+                        <Menu.Item key="0">
+                            <Link to='/'>
+                            <DashboardOutlined />
+                            <span>Dashboard</span>
+                            </Link>
+                        </Menu.Item>
                         <Menu.Item key="1">
                             <Link to='/'>
                             <UserOutlined />

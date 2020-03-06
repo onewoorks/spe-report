@@ -30,11 +30,13 @@ class AppHeader extends React.Component {
 
     render() {
         let user = this.props.auth.keycloak.tokenParsed
+        let side_width = !this.props.sider_icon ? 200 : 0
+        let nav_width = window.innerWidth - side_width
         return (
-            <>
+            <div style={{display:'flex'}}>
                 <Header
                     className="header"
-                    style={{ background: '#fff', padding: 0 }}
+                    style={{ background: '#fff', padding: 0, position:'fixed', width: nav_width, transition: '0.2s', zIndex:1}}
                 >
                     <Row justify="space-between">
                         <Col span={12}>
@@ -65,7 +67,7 @@ class AppHeader extends React.Component {
                         </Col>
                     </Row>
                 </Header>
-            </>
+            </div>
         )
     }
 }

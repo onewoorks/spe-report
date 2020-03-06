@@ -37,14 +37,15 @@ const MainApps = () => {
             return (
                 <Layout style={{ height: '100vh' }}>
                     <Sider />
-                    <Layout>
+                    <Layout className="site-layout">
                         <Header auth={auth} />
                         <Content
+                            className="site-layout-background"
                             style={{
                                 margin: '14px',
-                                padding: 24,
-                                background: '#fff',
-                                minHeight: 280
+                                marginTop: 80,
+                                minHeight: 280,
+                                overflow:'initial'
                             }}
                         >
                             <Switch>
@@ -57,9 +58,9 @@ const MainApps = () => {
                                     />
                                 ))}
                             </Switch>
-                            
+                            <Footer />
                         </Content>
-                        <Footer />
+                        
                     </Layout>
                 </Layout>
             )
