@@ -54,3 +54,8 @@
 .trigger:hover {
   color: #1890ff;
 }
+
+.footer {
+  padding: 4px 16px ;
+  font-size: 0.7rem;
+}

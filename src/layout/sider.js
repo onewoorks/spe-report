@@ -1,5 +1,6 @@
 import React from "react"
-import { Layout, Menu, Icon } from "antd"
+import { Layout, Menu } from "antd"
+import { UserOutlined } from '@ant-design/icons'
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 
@@ -29,21 +30,21 @@ class AppSider extends React.Component {
                     >
                         <Menu.Item key="1">
                             <Link to='/'>
-                            <Icon type="user" />
+                            <UserOutlined />
                             <span>Home</span>
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Icon type="video-camera" />
+                            <UserOutlined />
                             <span>nav 2</span>
                         </Menu.Item>
                         <Menu.Item key="3">
-                            <Icon type="upload" />
+                            <UserOutlined />
                             <span>nav 3</span>
                         </Menu.Item>
                         <Menu.Item key="4">
                             <Link to="/edit">
-                                <Icon type="upload" />
+                                <UserOutlined />
                                 <span>Edit Stock</span>
                             </Link>
                         </Menu.Item>
