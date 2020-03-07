@@ -63,3 +63,7 @@
 .row-mb {
   margin-bottom: 12px;
 }
+
+.card-graph > .ant-card-body {
+  padding: 0 !important
+}
