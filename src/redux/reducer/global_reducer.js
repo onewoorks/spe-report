@@ -19,6 +19,14 @@ const globalReducer = (state = global_state, action = {}) => {
             current_menu: action.route_key
         }
     }
+
+    if(action.type === "LOGGED_USER"){
+        return{
+            ...state,
+            logged_user: action.payloads
+        }
+    }
+
     return state
 }
 

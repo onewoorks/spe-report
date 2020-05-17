@@ -1,45 +1,37 @@
 import React from 'react'
-import { Row, Col, Card, Skeleton } from 'antd'
+import { Row, Col, Button } from 'antd'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-import GroupColumn from '../../charts/GroupColumn'
-import Line from '../../charts/Line'
+import UserCard from '../../components/UserCard.js'
 
 const Dashboard = () => {
-    return(
-        <>
-        <Row gutter={12} className="row-mb">
-            <Col span={18}>
-                <Card className='card-graph' title="Transaksi Aliran Wang" >
-                    <GroupColumn />
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card className="card-graph" title="Peratus kenaikan">
-                    <Line />
-                </Card>
-            </Col>
-        </Row>
-        <Row gutter={12} className="row-mb">
-            <Col span={24}>
-                <Card>
-                    <Skeleton active />
-                </Card>
-            </Col>
-        </Row>
-        <Row gutter={12} className="row-mb">
-            <Col span={12}>
-                <Card>
-                    <Skeleton active />
-                </Card>
-            </Col>
+    const [users, setUsers] = React.useState([])
+    React.useEffect(() => {
+        axios
+            .get(`http://localhost:3000/users/all-users`)
+            .then((response) => setUsers(response.data))
+    }, [])
 
-            <Col span={12}>
-            <Card>
-                <Skeleton active />
-            </Card>
-            </Col>
+    const Users = () => {
+        return users.map((x, index) => {
+            return (
+                <Col key={index} span={6}>
+                    <UserCard user={x} />
+                </Col>
+            )
+        })
+    }
+
+    return (
+        <div>
+        <Row className="row-mb">
+            <Col><Link to="/new-user"><Button>New User</Button></Link></Col>
         </Row>
-        </>
+            <Row gutter={[12, 12]} className="row-mb">
+                <Users />
+            </Row>
+        </div>
     )
 }
 

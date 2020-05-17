@@ -2,6 +2,7 @@ import React from 'react'
 
 import Dashboard from './pages/dashboard'
 import PageEdit from './pages/stocks/edit_stock'
+import UserForm from './pages/Users/UserForm.jsx'
 
 const routes = [
     {
@@ -16,6 +17,11 @@ const routes = [
         sidebar: () => <div>edit</div>,
         main: () => <PageEdit />
     }, 
+    { 
+        path: '/new-user',
+        exact: true,
+        main: () => <UserForm />
+    }
 ]
 
 export default routes

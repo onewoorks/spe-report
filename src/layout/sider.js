@@ -37,7 +37,7 @@ class AppSider extends React.Component {
                         <Menu.Item key="1">
                             <Link to='/'>
                             <UserOutlined />
-                            <span>Home</span>
+                            <span>Cawangan</span>
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="2">

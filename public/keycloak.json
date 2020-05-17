@@ -1,8 +1,8 @@
 {
-    "realm": "development",
-    "auth-server-url": "https://sso.pengurusanemas.my/auth",
-    "ssl-required": "external",
-    "resource": "admin_template",
-    "public-client": true,
-    "confidential-port": 0
-  }
+  "realm": "development",
+  "auth-server-url": "https://sso.pengurusanemas.my/auth",
+  "ssl-required": "external",
+  "resource": "user-management",
+  "public-client": true,
+  "confidential-port": 0
+}
