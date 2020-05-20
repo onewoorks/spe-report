@@ -1,11 +1,16 @@
 import React from 'react'
-import { Card, Form, Tabs, Input, Radio, Select, Button,Checkbox } from 'antd'
+import { Card, Form, Tabs, Input, Radio, Button } from 'antd'
 import { connect } from 'react-redux'
+
+import AksesAppsAllowed from '../../components/akses/AppsAllowed.jsx'
+import AksesInventory from '../../components/akses/Inventori.jsx'
 
 const { TextArea } = Input
 const { TabPane } = Tabs
 const NewUser = (props) => {
-    console.log(props.user_attributes)
+    const [ akses, setAkses ] = React.useState({
+        apps_allowed: {}
+    })
     const submitForm = (values) => console.log(values)
 
     const layout = {
@@ -16,13 +21,29 @@ const NewUser = (props) => {
         wrapperCol: { offset: 5, span: 16 },
     }
 
+    const aksesGranted = (granted) => {
+        // setAkses({...akses,apps_allowed: granted})
+        console.log(granted)
+    }
+
     const BasicInfo = () => {
         return (
             <div>
-                <Form.Item label="First Name" name="firstname" style={{marginTop:20}}>
+                <Form.Item
+                    label="Nama Pengguna"
+                    name="username"
+                    style={{ marginTop: 20 }}
+                >
                     <Input />
                 </Form.Item>
-                <Form.Item label="Last Name" name="lastname">
+                <Form.Item
+                    label="Nama Depan"
+                    name="firstname"
+                    style={{ marginTop: 20 }}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item label="Nama Belakang" name="lastname">
                     <Input />
                 </Form.Item>
                 <Form.Item label="Jantina" name="gender">
@@ -58,12 +79,13 @@ const NewUser = (props) => {
     const AksesCawanganDanApplikasi = () => {
         return (
             <div>
-               <Form.Item label="Aplikasi SPE">
-                    <Checkbox.Group>
-                        <Checkbox value="inventori">Inventori</Checkbox>
-                        <Checkbox value="kakitangan">Pengurusan Kakitangan</Checkbox>
-                    </Checkbox.Group>
-               </Form.Item>
+                <Form.Item label="Aplikasi SPE" >
+                    <AksesAppsAllowed
+                        apps_allowed={props.user_attributes.apps_allowed}
+                        granted={(apps_granted)=> aksesGranted(apps_granted)}
+                    />
+                </Form.Item>
+                <AksesInventory cawangan={props.user_attributes.domain} show={false} />
             </div>
         )
     }
@@ -71,7 +93,7 @@ const NewUser = (props) => {
     return (
         <Card title="Maklumat Pengguna Sistem">
             <Form {...layout} name="user-registration" onFinish={submitForm}>
-                <Tabs defaultActiveKey="1" type="card" >
+                <Tabs defaultActiveKey="1" type="card">
                     <TabPane tab="Informasi Asas" key="1">
                         <BasicInfo />
                     </TabPane>
@@ -84,9 +106,9 @@ const NewUser = (props) => {
     )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        user_attributes: state.globalReducer.logged_user
+        user_attributes: state.globalReducer.logged_user,
     }
 }
 export default connect(mapStateToProps)(NewUser)
