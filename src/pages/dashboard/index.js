@@ -8,9 +8,6 @@ import UserCard from '../../components/UserCard.js'
 const Dashboard = () => {
     const [users, setUsers] = React.useState([])
     React.useEffect(() => {
-        axios
-            .get(`http://localhost:3000/users/all-users`)
-            .then((response) => setUsers(response.data))
     }, [])
 
     const Users = () => {

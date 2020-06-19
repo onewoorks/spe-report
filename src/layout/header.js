@@ -10,10 +10,13 @@ import { connect } from 'react-redux'
 
 const { Header } = Layout
 
+const go_to_central = () => {
+    window.location.href = process.env.REACT_APP_CEMTRAL_APPS
+}
 const user_menu = (props) => {
     return (
     <Menu>
-        <Menu.Item>Central Apps</Menu.Item>
+        <Menu.Item onClick={go_to_central}>Central Apps</Menu.Item>
         <Menu.Divider />
         <Menu.Item>
             <div onClick={() => props.keycloak.logout()}>Logout</div>
