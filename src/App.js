@@ -6,7 +6,7 @@ import Sider from './layout/sider.js'
 import Footer from './layout/footer'
 import './App.css'
 import axios from 'axios'
-import { Switch, Route } from 'react-router-dom'
+import {Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 axios.defaults.headers.common['realm'] = 'development'
@@ -18,7 +18,7 @@ const MainApps = (props) => {
     const [auth, setAuth] = React.useState({})
 
     React.useEffect(() => {
-        const keycloak = Keycloak('./keycloak.json')
+        const keycloak = Keycloak('/keycloak.json')
         keycloak
             .init({
                 onLoad: 'login-required',
@@ -38,7 +38,6 @@ const MainApps = (props) => {
 
     if (auth.keycloak) {
         if (auth.authenticated) {
-            
             return (
                 <Layout style={{ height: '100vh' }}>
                     <Sider />
@@ -65,7 +64,6 @@ const MainApps = (props) => {
                             </Switch>
                             <Footer />
                         </Content>
-                        
                     </Layout>
                 </Layout>
             )

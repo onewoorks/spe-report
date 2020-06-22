@@ -1,33 +1,67 @@
 import React from 'react'
-import { Row, Col, Button } from 'antd'
+import { PageHeader, Divider, Card, Row, Col, Button } from 'antd'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Lottie from 'react-lottie'
 
-import UserCard from '../../components/UserCard.js'
+import * as animationData from '../../assets/lottie/dashboard.json'
+import * as graphData from '../../assets/lottie/graph.json'
 
 const Dashboard = () => {
-    const [users, setUsers] = React.useState([])
-    React.useEffect(() => {
-    }, [])
+    const routes = [
+        {
+            path: 'index',
+            breadcrumbName: 'Overview',
+        },
+    ]
 
-    const Users = () => {
-        return users.map((x, index) => {
-            return (
-                <Col key={index} span={6}>
-                    <UserCard user={x} />
-                </Col>
-            )
-        })
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData.default,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice',
+        },
+    }
+
+    const lottie_graph = {
+        loop: true,
+        autoplay: true,
+        animationData: graphData.default,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice',
+        }
     }
 
     return (
         <div>
-        <Row className="row-mb">
-            <Col><Link to="/new-user"><Button>New User</Button></Link></Col>
-        </Row>
-            <Row gutter={[12, 12]} className="row-mb">
-                <Users />
-            </Row>
+            <PageHeader title="Dashboard" breadcrumb={{ routes }} />
+            <div className="content-panel">
+                <Row gutter={[16,16]}>
+                    <Col span={12}>
+                    <Card title="Dashboard Laporan" size="small">
+                        <Lottie
+                            options={defaultOptions}
+                            height={300}
+                            width={300}
+                            isStopped={false}
+                            isPaused={false}
+                        />
+                        </Card>
+                    </Col>
+                    <Col span={12}>
+                        <Card title="Pergerakan Stok dan Jualan" size="small">
+                            <Lottie
+                            options={lottie_graph}
+                            height={300}
+                            width={300}
+                            isStopped={false}
+                            isPaused={false}
+                        />
+                        </Card>
+                    </Col>
+                </Row>
+            </div>
         </div>
     )
 }

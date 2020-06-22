@@ -67,3 +67,11 @@
 .card-graph > .ant-card-body {
   padding: 0 !important
 }
+
+.content-panel {
+  margin: 0 24px 24px 24px;
+}
+
+.ant-row {
+  margin-bottom:12px !important
+}

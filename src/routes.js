@@ -4,6 +4,8 @@ import Dashboard from './pages/dashboard'
 import PageEdit from './pages/stocks/edit_stock'
 import UserForm from './pages/Users/UserForm.jsx'
 
+import StocksDalamSimpanan from './pages/stocks/DalamSimpanan.jsx'
+
 const routes = [
     {
         path: '/',
@@ -11,6 +13,11 @@ const routes = [
         sidebar: () => <div>Dashboard</div>,
         main: () => <Dashboard />
     }, 
+    { 
+        path: '/stok/dalam-simpanan',
+        exact: true,
+        main: () => <StocksDalamSimpanan />
+    },
     {
         path: '/edit',
         exact: true,
