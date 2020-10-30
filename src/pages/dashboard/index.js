@@ -1,7 +1,5 @@
 import React from 'react'
-import { PageHeader, Divider, Card, Row, Col, Button } from 'antd'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { PageHeader, Card, Row, Col } from 'antd'
 import Lottie from 'react-lottie'
 
 import * as animationData from '../../assets/lottie/dashboard.json'

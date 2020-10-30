@@ -8,7 +8,6 @@ import './App.css'
 import axios from 'axios'
 import {Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import ReportStock from './pages/stocks/ReportStock.jsx'
 
 axios.defaults.headers.common['realm'] = 'development'
 
@@ -16,10 +15,34 @@ const { Content } = Layout
 const routes = require('./routes')
 
 const MainApps = (props) => {
+    const [auth, setAuth] = React.useState({})
+
+    React.useEffect(() => {
+        const keycloak = Keycloak('/keycloak.json')
+        keycloak
+            .init({
+                onLoad: 'login-required',
+                promiseType: 'native',
+                checkLoginIframe: false
+            })
+            .then(authenticated => {
+                setAuth({
+                  keycloak: keycloak,
+                  tokenParsed: keycloak.idTokenParsed,
+                  authenticated: authenticated,
+                  apps: keycloak.resourcesAccess
+                })
+                props.logged_user(keycloak.idTokenParsed)
+            })
+    },[props])
+
+    if (auth.keycloak) {
+        if (auth.authenticated) {
             return (
                 <Layout style={{ height: '100vh' }}>
                     <Sider />
                     <Layout className="site-layout">
+                        <Header auth={auth} />
                         <Content
                             className="site-layout-background"
                             style={{
@@ -35,7 +58,7 @@ const MainApps = (props) => {
                                         key={index}
                                         path={route.path}
                                         exact={route.exact}
-                                        component={route.component}
+                                        children={<route.main />}
                                     />
                                 ))}
                             </Switch>
@@ -44,12 +67,17 @@ const MainApps = (props) => {
                     </Layout>
                 </Layout>
             )
+        } else {
+            return <div>unable to authenticate</div>
+        }
     }
+    return <div>initilizing authentication</div>
+}
+
 
 const mapDispatchToProps = dispatch => {
     return {
         logged_user: (payloads) => dispatch({ type:"LOGGED_USER", payloads: payloads})
     }
 }
-
 export default connect(null, mapDispatchToProps)(MainApps)

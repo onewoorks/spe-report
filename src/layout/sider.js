@@ -45,6 +45,9 @@ const AppSider = (props) => {
                         </Link>
                     </Menu.Item>
                     <SubMenu key="200" icon={<UserOutlined />} title="Stok SPE">
+                        <Menu.Item key="204">
+                            <Link to="/stok/stok-akhir">Stok Akhir</Link>
+                        </Menu.Item>
                         <Menu.Item key="201">
                             <Link to="/stok/dalam-simpanan">
                                 Dalam Simpanan
@@ -55,9 +58,6 @@ const AppSider = (props) => {
                         </Menu.Item>
                         <Menu.Item key="203">
                             <Link to="/stok/buang">Buang</Link>
-                        </Menu.Item>
-                        <Menu.Item key="204">
-                            <Link to="/stok/stok-akhir">Stok Akhir</Link>
                         </Menu.Item>
                         <Menu.Item key="205">
                             <Link to="/stok/invois-belian">Invois Belian</Link>

@@ -2,9 +2,8 @@ import React from 'react'
 
 import Dashboard from './pages/dashboard'
 import PageEdit from './pages/stocks/edit_stock'
-import UserForm from './pages/Users/UserForm.jsx'
 
-import StocksDalamSimpanan from './pages/stocks/DalamSimpanan.jsx'
+import ReportStock from  './pages/stocks/ReportStock.jsx'
 
 const routes = [
     {
@@ -13,21 +12,15 @@ const routes = [
         sidebar: () => <div>Dashboard</div>,
         main: () => <Dashboard />
     }, 
-    { 
-        path: '/stok/dalam-simpanan',
-        exact: true,
-        main: () => <StocksDalamSimpanan />
-    },
     {
         path: '/edit',
         exact: true,
         sidebar: () => <div>edit</div>,
         main: () => <PageEdit />
     }, 
-    { 
-        path: '/new-user',
-        exact: true,
-        main: () => <UserForm />
+    {
+        path: '/stok/:stokpage?',
+        component: ReportStock
     }
 ]
 
