@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Form, Select, Button, DatePicker, Card } from 'antd'
+import { Row, Col, Form, Select, Button, DatePicker, Card, Input } from 'antd'
 import axios from 'axios'
 
 import ReportStokStats from './stats.jsx'
@@ -7,8 +7,11 @@ import ReportStokDataTables from './data_tables.jsx'
 import { SearchOutlined } from '@ant-design/icons'
 
 const { Option } = Select
+const { RangePicker } = DatePicker
 
-const ReportStokFilter = () => {
+const ReportStokFilter = (props) => {
+    let resturl = props.resturl
+    let report = props.report
     const [cawangan, setCawangan] = React.useState([])
     const [ringkasan, setRingksan] = React.useState([])
     const [form] = Form.useForm()
@@ -34,7 +37,7 @@ const ReportStokFilter = () => {
         form.validateFields().then((values) => {
             let tarikh_akhir = values.tarikh_akhir.format('YYYY-MM-DD')
             axios
-                .post(`http://localhost:8000/api/stok/tarikh-akhir`, {
+                .post(`http://localhost:8000/api${resturl}`, {
                     cawangan: values.cawangan,
                     tarikh_akhir: tarikh_akhir,
                 })
@@ -46,18 +49,46 @@ const ReportStokFilter = () => {
         })
     }
 
+    const NoInvois = () => {
+        let item = ""
+        if(['stok-invois-belian'].includes(report)){
+            item = (
+                <Form.Item label={'No Invois'}>
+                    <Input placeholder="No Invois" />
+                </Form.Item>
+            )
+        }
+        return item
+    }
+
+    const DateSelector = () => {
+        let item = ""
+        if (['stok-akhir'].includes(report)) {
+            item = (
+                <Form.Item label={'Tarikh Akhir'} name="tarikh_akhir">
+                    <DatePicker />
+                </Form.Item>
+            )
+        }
+        if (['stok-daftar','stok-buang','stok-jual', 'stok-invois-belian'].includes(report)) {
+            item = (
+                <Form.Item label={'Tarikh Pilihan'} name="tarikh_pilihan">
+                    <RangePicker />
+                </Form.Item>
+            )
+        }
+        return item
+    }
+
     return (
         <>
             <Row gutter={[16, 16]}>
                 <Col span="12">
                     <Card title="Rekod Pilihan" style={{ minHeight: 242 }}>
                         <Form {...layout} onFinish={buat_carian} form={form}>
-                            <Form.Item
-                                label={'Tarikh Akhir'}
-                                name="tarikh_akhir"
-                            >
-                                <DatePicker />
-                            </Form.Item>
+                            <DateSelector />
+
+                            <NoInvois />
 
                             <Form.Item label={'Cawangan'} name="cawangan">
                                 <Select
@@ -72,6 +103,7 @@ const ReportStokFilter = () => {
                                     ))}
                                 </Select>
                             </Form.Item>
+
 
                             <Form.Item
                                 {...tailLayout}

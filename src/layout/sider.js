@@ -44,26 +44,50 @@ const AppSider = (props) => {
                             <span>Dashboard</span>
                         </Link>
                     </Menu.Item>
-                    <SubMenu key="200" icon={<UserOutlined />} title="Stok SPE">
+                    <SubMenu
+                        key="200"
+                        icon={<UserOutlined />}
+                        title="Stok Emas Baru"
+                    >
                         <Menu.Item key="204">
                             <Link to="/stok/stok-akhir">Stok Akhir</Link>
                         </Menu.Item>
                         <Menu.Item key="201">
-                            <Link to="/stok/dalam-simpanan">
-                                Dalam Simpanan
+                            <Link to="/stok/stok-daftar">
+                                Tarikh Pendaftaran
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="202">
-                            <Link to="/stok/telah-jual">Telah Jual</Link>
+                            <Link to="/stok/stok-jual">Telah Jual</Link>
                         </Menu.Item>
                         <Menu.Item key="203">
-                            <Link to="/stok/buang">Buang</Link>
+                            <Link to="/stok/stok-buang">Buang</Link>
                         </Menu.Item>
                         <Menu.Item key="205">
-                            <Link to="/stok/invois-belian">Invois Belian</Link>
+                            <Link to="/stok/stok-invois-belian">Invois Belian</Link>
                         </Menu.Item>
                     </SubMenu>
 
+                    <SubMenu
+                        key="emas-lama"
+                        icon={<UserOutlined />}
+                        title="Stok Emas Lama"
+                    >
+                        <Menu.Item key="emas-lama-akhir">
+                            <Link to="/stok/emas-lama-akhir">Stok Akhir</Link>
+                        </Menu.Item>
+                        <Menu.Item key="emas-lama-daftar">
+                            <Link to="/stok/emas-lama-daftar">
+                                Tarikh Pendaftaran
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key="emas-lama-jual">
+                            <Link to="/stok/emas-lama-jual">Telah Jual</Link>
+                        </Menu.Item>
+                        <Menu.Item key="emas-lama-buang">
+                            <Link to="/stok/emas-lama-buang">Buang</Link>
+                        </Menu.Item>
+                    </SubMenu>
                     <SubMenu
                         key="300"
                         icon={<UserOutlined />}
@@ -82,11 +106,10 @@ const AppSider = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.globalReducer)
     return {
         collapsed_sider: state.globalReducer.menu_collapsed,
         current_route: state.globalReducer.current_menu,
-        current_openkey: state.globalReducer.current_openkey
+        current_openkey: state.globalReducer.current_openkey,
     }
 }
 

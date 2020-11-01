@@ -15,6 +15,7 @@ const ReportStokStats = (props) => {
             stok_nilai += parseFloat(x.modal_belum_jual)
             modal_emas += parseFloat(x.modal_emas_belum_jual)
             modal_bukan_emas += parseFloat(x.modal_bukan_emas_belum_jual)
+            return true
         })
 
         return (

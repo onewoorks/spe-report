@@ -1,14 +1,13 @@
 import React from 'react'
-import Keycloak from 'keycloak-js'
+// import Keycloak from 'keycloak-js'
 import { Layout } from 'antd'
-import Header from './layout/header'
+// import Header from './layout/header'
 import Sider from './layout/sider.js'
 import Footer from './layout/footer'
 import './App.css'
 import axios from 'axios'
 import {Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import ReportStock from './pages/stocks/ReportStock.jsx'
 
 axios.defaults.headers.common['realm'] = 'development'
 

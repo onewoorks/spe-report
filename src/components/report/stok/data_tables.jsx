@@ -11,6 +11,7 @@ const ReportStokDataTables = (props) => {
         props.tarikh_akhir === '-'
             ? '-'
             : Moment(props.tarikh_akhir).format('Do MMMM YYYY')
+
     const dataSource = ringkasan
     const columns = [
         {
@@ -48,13 +49,11 @@ const ReportStokDataTables = (props) => {
             title: 'Tindakan',
             align: 'center',
             render: (text, record) => {
-                console.log(text)
-                console.log(record)
                 let path = `${text.kedai}/${props.tarikh_akhir}/${text.tag}`
                 return (
                     <Space>
                         <Link to={`/stok/stok-akhir-detail/${path}`}><Button>Lihat Rekod</Button></Link>
-                        <Button>Export</Button>
+                        <Button onClick={() => window.open(`http://localhost:8000/api/export/stok/tarikh-akhir-detail/${props.tarikh_akhir}/${text.tag}/${text.kedai}`)}>Export</Button>
                     </Space>
                 )
             },
@@ -65,7 +64,7 @@ const ReportStokDataTables = (props) => {
         <Row gutter={[16, 16]} style={{ marginTop: -32 }}>
             <Col span={24}>
                 <Card
-                    title={`Ringkasan maklumat stok akhir sehinggan tarikh ${tarikh}`}
+                    title={`Ringkasan maklumat stok akhir sehingga tarikh ${tarikh}`}
                 >
                     <Spin spinning={loading}>
                         <Table
