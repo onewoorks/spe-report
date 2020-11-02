@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ReportStokFilter from '../../components/report/stok/filter.jsx'
+import ReportStokFilter from '../../components/report/stok/ReportStokFilter.jsx'
 
 const ReportTarikhAkhir = (props) => {
     let resturl = props.match.url

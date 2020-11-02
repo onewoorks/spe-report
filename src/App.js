@@ -1,7 +1,7 @@
 import React from 'react'
 // import Keycloak from 'keycloak-js'
 import { Layout } from 'antd'
-// import Header from './layout/header'
+import Header from './layout/header'
 import Sider from './layout/sider.js'
 import Footer from './layout/footer'
 import './App.css'
@@ -19,6 +19,7 @@ const MainApps = (props) => {
                 <Layout style={{ height: '100vh' }}>
                     <Sider />
                     <Layout className="site-layout">
+                    <Header />
                         <Content
                             className="site-layout-background"
                             style={{
@@ -29,14 +30,15 @@ const MainApps = (props) => {
                             }}
                         >
                             <Switch>
-                                {routes.default.map((route, index) => (
+                                {routes.default.map((route, index) => {
+                                    return(
                                     <Route
                                         key={index}
                                         path={route.path}
                                         exact={route.exact}
                                         component={route.component}
                                     />
-                                ))}
+                                )})}
                             </Switch>
                             <Footer />
                         </Content>

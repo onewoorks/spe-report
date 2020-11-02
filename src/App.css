@@ -39,8 +39,14 @@
 
 .logo {
   height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  /* background: rgba(255, 255, 255, 0.2); */
   margin: 16px;
+  font-style: italic;
+  text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 32px;
 }
 
 .trigger {

@@ -1,9 +1,7 @@
 import React from 'react'
-import { PageHeader, Card, Row, Col } from 'antd'
-import Lottie from 'react-lottie'
-
-import * as animationData from '../../assets/lottie/dashboard.json'
-import * as graphData from '../../assets/lottie/graph.json'
+import { PageHeader, Card, Row, Col, Statistic } from 'antd'
+import StokCawangan from './graphs/StokCawangan'
+import StokJualan from './graphs/StokJualan'
 
 const Dashboard = () => {
     const routes = [
@@ -13,54 +11,69 @@ const Dashboard = () => {
         },
     ]
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData.default,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice',
-        },
-    }
-
-    const lottie_graph = {
-        loop: true,
-        autoplay: true,
-        animationData: graphData.default,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice',
-        }
+    const StatistikStok = () => {
+        return (
+            <Row gutter={[0, 16]}>
+                <Col span={24}>
+                    <Card>
+                    <Statistic
+                        title="Jumlah Stok Pilihan (Nilai)"
+                        value={0}
+                        precision={2}
+                        valueStyle={{ color: '#3f8600' }}
+                        prefix={'RM '}
+                    />
+                    </Card>
+                </Col>
+                <Col span={24}>
+                    <Card>
+                    <Statistic
+                        title="Jumlah Stok Pilihan (Nilai)"
+                        value={0}
+                        precision={2}
+                        valueStyle={{ color: '#3f8600' }}
+                        prefix={'RM '}
+                    />
+                    </Card>
+                </Col>
+                <Col span={24}>
+                    <Card>
+                    <Statistic
+                        title="Jumlah Stok Pilihan (Nilai)"
+                        value={0}
+                        precision={2}
+                        valueStyle={{ color: '#3f8600' }}
+                        prefix={'RM '}
+                    />
+                    </Card>
+                </Col>
+                
+            </Row>
+        )
     }
 
     return (
-        <div>
+        <>
             <PageHeader title="Dashboard" breadcrumb={{ routes }} />
-            <div className="content-panel">
-                <Row gutter={[16,16]}>
-                    <Col span={12}>
-                    <Card title="Dashboard Laporan" size="small">
-                        <Lottie
-                            options={defaultOptions}
-                            height={300}
-                            width={300}
-                            isStopped={false}
-                            isPaused={false}
-                        />
+            <div className="">
+                <Row gutter={[16]}>
+                    <Col span={16}>
+                        <Card title="Ringkasan Stok Cawangan">
+                            <StokCawangan height={265} />
                         </Card>
                     </Col>
-                    <Col span={12}>
-                        <Card title="Pergerakan Stok dan Jualan" size="small">
-                            <Lottie
-                            options={lottie_graph}
-                            height={300}
-                            width={300}
-                            isStopped={false}
-                            isPaused={false}
-                        />
+                    <Col span={8}>
+                        <StatistikStok />
+                    </Col>
+                    <Col span={24}>
+                        <Card title="Statistik Jualan Setiap Cawangan">
+                            <StokJualan height={265} />
                         </Card>
                     </Col>
                 </Row>
+                    
             </div>
-        </div>
+        </>
     )
 }
 

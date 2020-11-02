@@ -3,7 +3,7 @@ import { Row, Col, Form, Select, Button, DatePicker, Card, Input } from 'antd'
 import axios from 'axios'
 
 import ReportStokStats from './stats.jsx'
-import ReportStokDataTables from './data_tables.jsx'
+import ReportStokDataTables from './ReportStokDataTables.jsx'
 import { SearchOutlined } from '@ant-design/icons'
 
 const { Option } = Select
@@ -15,7 +15,7 @@ const ReportStokFilter = (props) => {
     const [cawangan, setCawangan] = React.useState([])
     const [ringkasan, setRingksan] = React.useState([])
     const [form] = Form.useForm()
-    const [tarikhAkhir, setTarikhAkhir] = React.useState('-')
+    const [tarikhReport, setTarikhReport] = React.useState([])
     const [loading, setLoading] = React.useState(false)
 
     React.useEffect(() => {
@@ -35,15 +35,17 @@ const ReportStokFilter = (props) => {
     const buat_carian = () => {
         setLoading(true)
         form.validateFields().then((values) => {
-            let tarikh_akhir = values.tarikh_akhir.format('YYYY-MM-DD')
+            let tarikh = (typeof values.tarikh.length === 'undefined') ? values.tarikh.format('YYYY-MM-DD') : [values.tarikh[0].format('YYYY-MM-DD'), values.tarikh[1].format('YYYY-MM-DD')]
+            let post_body = {
+                cawangan: values.cawangan,
+                tarikh: tarikh
+            }
+            
             axios
-                .post(`http://localhost:8000/api${resturl}`, {
-                    cawangan: values.cawangan,
-                    tarikh_akhir: tarikh_akhir,
-                })
+                .post(`http://localhost:8000/api${resturl}`, post_body)
                 .then((response) => {
                     setRingksan(response.data)
-                    setTarikhAkhir(tarikh_akhir)
+                    setTarikhReport(tarikh)
                     setLoading(false)
                 })
         })
@@ -65,14 +67,14 @@ const ReportStokFilter = (props) => {
         let item = ""
         if (['stok-akhir'].includes(report)) {
             item = (
-                <Form.Item label={'Tarikh Akhir'} name="tarikh_akhir">
+                <Form.Item label={'Tarikh Akhir'} name="tarikh">
                     <DatePicker />
                 </Form.Item>
             )
         }
-        if (['stok-daftar','stok-buang','stok-jual', 'stok-invois-belian'].includes(report)) {
+        if (['stok-daftar','stok-buang','stok-jual'].includes(report)) {
             item = (
-                <Form.Item label={'Tarikh Pilihan'} name="tarikh_pilihan">
+                <Form.Item label={'Tarikh Pilihan'} name="tarikh">
                     <RangePicker />
                 </Form.Item>
             )
@@ -87,7 +89,6 @@ const ReportStokFilter = (props) => {
                     <Card title="Rekod Pilihan" style={{ minHeight: 242 }}>
                         <Form {...layout} onFinish={buat_carian} form={form}>
                             <DateSelector />
-
                             <NoInvois />
 
                             <Form.Item label={'Cawangan'} name="cawangan">
@@ -103,7 +104,6 @@ const ReportStokFilter = (props) => {
                                     ))}
                                 </Select>
                             </Form.Item>
-
 
                             <Form.Item
                                 {...tailLayout}
@@ -122,9 +122,10 @@ const ReportStokFilter = (props) => {
                 </Col>
             </Row>
             <ReportStokDataTables
+                report={report}
                 ringkasan={ringkasan}
                 loading={loading}
-                tarikh_akhir={tarikhAkhir}
+                tarikh={tarikhReport}
             />
         </>
     )

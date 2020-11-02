@@ -29,7 +29,7 @@ const AppSider = (props) => {
                 collapsedWidth="0"
                 collapsed={props.collapsed_sider}
             >
-                <div className="logo">Report</div>
+                <div className="logo">SPE STOK REPORT</div>
                 <Menu
                     theme="dark"
                     mode="inline"

@@ -11,6 +11,7 @@ import ReportStokBuang from './ReportStokBuang'
 import ReportStokDaftar from './ReportStokDaftar'
 import ReportStokJual from './ReportStokJual'
 import ReportStokInvoisBelian from './ReportStokInvoisBelian'
+import ReportStockDaftarDetail from './ReportStockDaftarDetail'
 
 const ReportStock = (props) => {
     const CleanTitle = (title_) => {
@@ -26,6 +27,7 @@ const ReportStock = (props) => {
                 <div style={{textTransform:'capitalize'}}><PageHeader title={CleanTitle(title)} /></div>
                 <Route exact path="/stok/stok-akhir" component={() => <ReportTarikhAkhir {...props} />} />
                 <Route exact path="/stok/stok-daftar" component={() => <ReportStokDaftar {...props} />} />
+                <Route exact path="/stok/stok-daftar-detail/:kedai/:tarikh_mula/:tarikh_akhir/:tag" component={ReportStockDaftarDetail} />
                 <Route exact path="/stok/stok-jual" component={() => <ReportStokJual {...props} />} />
                 <Route exact path="/stok/stok-akhir-detail/:kedai/:tarikh/:tag" component={ReportStokDetail} />
                 <Route exact path="/stok/stok-buang" component={() => <ReportStokBuang {...props} />} />

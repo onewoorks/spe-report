@@ -9,8 +9,7 @@ const routes = [
     {
         path: '/',
         exact: true,
-        sidebar: () => <div>Dashboard</div>,
-        main: () => <Dashboard />
+        component: Dashboard 
     }, 
     {
         path: '/edit',
