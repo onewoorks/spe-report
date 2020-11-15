@@ -32,8 +32,8 @@ class AppHeader extends React.Component {
     toggle = () => this.props.toggle()
 
     render() {
-        // let user = this.props.auth.keycloak.tokenParsed
-        let user = { name: "iwang"}
+        let user = this.props.auth.keycloak.tokenParsed
+        // let user = { name: "iwang"}
         let side_width = !this.props.sider_icon ? 200 : 0
         let nav_width = window.innerWidth - side_width
         return (
