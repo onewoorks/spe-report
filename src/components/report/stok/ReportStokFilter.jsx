@@ -20,7 +20,7 @@ const ReportStokFilter = (props) => {
 
     React.useEffect(() => {
         axios
-            .get('${process.env.REACT_APP_REPORT_URI}/cawangan')
+            .get(`${process.env.REACT_APP_REPORT_URI}/cawangan`)
             .then((data) => setCawangan(data.data))
     }, [])
 
