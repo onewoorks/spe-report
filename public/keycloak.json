@@ -1,5 +1,5 @@
 {
-  "realm": "development",
+  "realm": "pengurusanemas.my",
   "auth-server-url": "https://sso.pengurusanemas.my/auth",
   "ssl-required": "external",
   "resource": "spe-stok",
