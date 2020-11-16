@@ -46,7 +46,7 @@ const ReportStockDetail = (props) => {
     ]
     React.useEffect(() => {
         axios
-            .post(`http://localhost:8000/api/stok/tarikh-akhir-detail`, {
+            .post(`${process.env.REACT_APP_REPORT_URI}/stok/tarikh-akhir-detail`, {
                 cawangan: params.kedai,
                 tarikh_akhir: params.tarikh,
                 tag: params.tag,
@@ -58,7 +58,7 @@ const ReportStockDetail = (props) => {
     }, [params])
 
     const ExportToCsv = () => {
-        window.open(`http://localhost:8000/api/export/stok/tarikh-akhir-detail/${params.tarikh}/${params.tag}/${params.kedai}`)
+        window.open(`${process.env.REACT_APP_REPORT_URI}/export/stok/tarikh-akhir-detail/${params.tarikh}/${params.tag}/${params.kedai}`)
     }
 
     return (

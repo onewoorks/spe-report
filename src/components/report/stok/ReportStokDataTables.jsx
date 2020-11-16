@@ -162,7 +162,7 @@ const ReportStokDataTables = (props) => {
                         <Button
                             onClick={() =>
                                 window.open(
-                                    `http://localhost:8000/api/export/stok/tarikh-akhir-detail/${props.tarikh}/${text.tag}/${text.kedai}`
+                                    `${process.env.REACT_APP_REPORT_URI}/export/stok/tarikh-akhir-detail/${props.tarikh}/${text.tag}/${text.kedai}`
                                 )
                             }
                         >

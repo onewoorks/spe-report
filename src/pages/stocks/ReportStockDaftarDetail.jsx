@@ -10,7 +10,7 @@ const ReportStockDaftarDetail = (props) => {
     let params = props.match.params
     React.useEffect(() => {
         axios
-            .post(`http://localhost:8000/api/stok/stok-daftar-detail`, {
+            .post(`${process.env.REACT_APP_REPORT_URI}/stok/stok-daftar-detail`, {
                 cawangan: params.kedai,
                 tarikh: [params.tarikh_mula, params.tarikh_akhir],
                 tag: params.tag,

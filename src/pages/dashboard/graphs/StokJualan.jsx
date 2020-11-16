@@ -11,7 +11,7 @@ const StokJualan = (props) => {
     const asyncFetch = () => {
         axios
             .post(
-                'http://localhost:8000/api/statistik/stok-jualan-terkini-cawangan'
+                `${process.env.REACT_APP_REPORT_URI}/statistik/stok-jualan-terkini-cawangan`
             )
             .then((response) => {
               setData(response.data)

@@ -20,7 +20,7 @@ const ReportStokFilter = (props) => {
 
     React.useEffect(() => {
         axios
-            .get('http://localhost:8000/api/cawangan')
+            .get('${process.env.REACT_APP_REPORT_URI}/cawangan')
             .then((data) => setCawangan(data.data))
     }, [])
 
@@ -42,7 +42,7 @@ const ReportStokFilter = (props) => {
             }
             
             axios
-                .post(`http://localhost:8000/api${resturl}`, post_body)
+                .post(`${process.env.REACT_APP_REPORT_URI}${resturl}`, post_body)
                 .then((response) => {
                     setRingksan(response.data)
                     setTarikhReport(tarikh)

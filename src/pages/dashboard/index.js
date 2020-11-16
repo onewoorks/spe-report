@@ -16,7 +16,7 @@ const Dashboard = () => {
     ]
 
     React.useEffect(()=>{
-        axios.post(`http://localhost:8000/api/statistik/stok-terkini-cawangan`,{})
+        axios.post(`${process.env.REACT_APP_REPORT_URI}/statistik/stok-terkini-cawangan`,{})
         .then(response => {
            setDataTerkini(response.data)     
         })

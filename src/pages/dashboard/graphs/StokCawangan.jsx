@@ -8,7 +8,6 @@ const StokCawangan = (props) => {
         height: props.height,
         data: props.data,
         isStack: false,
-        autoFit: false,
         xField: 'kedai',
         yField: 'modal',
         yAxis: {
