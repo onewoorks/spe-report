@@ -8,8 +8,18 @@ const StokCawangan = (props) => {
         height: props.height,
         data: props.data,
         isStack: false,
+        autoFit: false,
         xField: 'kedai',
         yField: 'modal',
+        yAxis: {
+            label: {
+                formatter: (v) =>
+                    `${v}`.replace(
+                        /\d{1,3}(?=(\d{3})+$)/g,
+                        (s) => `${s},`
+                    ),
+            },
+        },
         seriesField: 'jenis',
         color: ['#f89234', '#c93031'],
     }

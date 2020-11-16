@@ -47,7 +47,7 @@ const MainApps = (props) => {
                             className="site-layout-background"
                             style={{
                                 margin: '14px',
-                                marginTop: 0,
+                                marginTop: 80,
                                 minHeight: 280,
                                 overflow:'initial'
                             }}

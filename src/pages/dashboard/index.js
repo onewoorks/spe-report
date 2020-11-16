@@ -18,8 +18,7 @@ const Dashboard = () => {
     React.useEffect(()=>{
         axios.post(`http://localhost:8000/api/statistik/stok-terkini-cawangan`,{})
         .then(response => {
-           setDataTerkini(response.data)
-           
+           setDataTerkini(response.data)     
         })
     },[])
 
@@ -67,7 +66,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <PageHeader title="Dashboard" breadcrumb={{ routes }} />
+            <PageHeader title="Dashboard"/>
             <div className="">
                 <Row gutter={[16]}>
                     <Col span={16}>
@@ -79,7 +78,7 @@ const Dashboard = () => {
                         <StatistikStok />
                     </Col>
                     <Col span={24}>
-                        <Card title="Statistik Jualan Setiap Cawangan">
+                        <Card title="Statistik Jualan Setiap Cawangan (30 hari)">
                             <StokJualan height={265} />
                         </Card>
                     </Col>
