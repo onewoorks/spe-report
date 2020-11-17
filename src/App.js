@@ -6,78 +6,68 @@ import Sider from './layout/sider.js'
 import Footer from './layout/footer'
 import './App.css'
 import axios from 'axios'
-import {Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { useAuth0 } from "@auth0/auth0-react";
 
-axios.defaults.headers.common['realm'] = 'development'
+// axios.defaults.headers.common['realm'] = 'development'
 
 const { Content } = Layout
 const routes = require('./routes')
 
 const MainApps = (props) => {
-    const [auth, setAuth] = React.useState({})
+    const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
-    React.useEffect(() => {
-        const keycloak = Keycloak('/keycloak.json')
-        keycloak
-            .init({
-                onLoad: 'login-required',
-                promiseType: 'native',
-                checkLoginIframe: false
-            })
-            .then(authenticated => {
-                setAuth({
-                  keycloak: keycloak,
-                  tokenParsed: keycloak.idTokenParsed,
-                  authenticated: authenticated,
-                  apps: keycloak.resourcesAccess
-                })
-                props.logged_user(keycloak.idTokenParsed)
-            })
-    },[props])
-
-    if (auth.keycloak) {
-        if (auth.authenticated) {
-            return (
-                <Layout style={{ height: '100vh' }}>
-                    <Sider />
-                    <Layout className="site-layout">
-                        <Header auth={auth} />
-                        <Content
-                            className="site-layout-background"
-                            style={{
-                                margin: '14px',
-                                marginTop: 80,
-                                minHeight: 280,
-                                overflow:'initial'
-                            }}
-                        >
-                            <Switch>
-                                {routes.default.map((route, index) => (
+    const Authenticate = () => {
+        return (
+            <Layout style={{ height: '100vh' }}>
+                <Sider />
+                <Layout className="site-layout">
+                    <Header />
+                    <Content
+                        className="site-layout-background"
+                        style={{
+                            margin: '14px',
+                            marginTop: 80,
+                            minHeight: 280,
+                            overflow: 'initial',
+                        }}
+                    >
+                        <Switch>
+                            {routes.default.map((route, index) => {
+                                return (
                                     <Route
                                         key={index}
                                         path={route.path}
                                         exact={route.exact}
                                         component={route.component}
                                     />
-                                ))}
-                            </Switch>
-                            <Footer />
-                        </Content>
-                    </Layout>
+                                )
+                            })}
+                        </Switch>
+                        <Footer />
+                    </Content>
                 </Layout>
-            )
-        } else {
-            return <div>unable to authenticate</div>
-        }
+            </Layout>
+        )
     }
-    return <div>initilizing authentication</div>
+
+    const Relogin = () => {
+        return <button onClick={() => loginWithRedirect()}>Log In</button>
+        // loginWithRedirect()
+    }
+
+
+    return isAuthenticated == true ? <Authenticate /> : <Relogin /> 
+
+
 }
 
-
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        logged_user: (payloads) => dispatch({ type:"LOGGED_USER", payloads: payloads})
+        logged_user: (payloads) =>
+            dispatch({ type: 'LOGGED_USER', payloads: payloads }),
     }
 }
+
 export default connect(null, mapDispatchToProps)(MainApps)
