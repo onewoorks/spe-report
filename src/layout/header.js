@@ -7,52 +7,35 @@ import {
     DownOutlined
 } from '@ant-design/icons'
 import { connect } from 'react-redux'
-import { useAuth0 } from "@auth0/auth0-react";
 
-// const { logout } = useAuth0();
 const { Header } = Layout
 
 const go_to_central = () => {
     window.location.href = process.env.REACT_APP_CEMTRAL_APPS
 }
+const user_menu = (props) => {
+    return (
+    <Menu>
+        <Menu.Item onClick={go_to_central}>Central Apps</Menu.Item>
+        <Menu.Divider />
+        <Menu.Item>
+            <div onClick={() => props.keycloak.logout()}>Logout</div>
+        </Menu.Item>
+    </Menu>
+)}
 
+class AppHeader extends React.Component {
+    state = {
+        collapsed: false
+    }
 
-// const user_menu = (props) => {
-//     return (
-//     <Menu>
-//         <Menu.Item onClick={go_to_central}>Central Apps</Menu.Item>
-//         <Menu.Divider />
-//         <Menu.Item>
-//             <div onClick={ () =>logout({
-//           returnTo: window.location.origin,
-//         })}>Logout</div>
-//         </Menu.Item>
-//     </Menu>
-// )}
+    toggle = () => this.props.toggle()
 
-const AppHeader = (props) => {
-    const [collapsed, setCollapsed] = React.useState(false)
-    const { logout} = useAuth0()
-
-    const user_menu = (props) => {
-        return (
-        <Menu>
-            <Menu.Item onClick={go_to_central}>Central Apps</Menu.Item>
-            <Menu.Divider />
-            <Menu.Item>
-                <div onClick={() => logout({
-                    returnTo: window.location.origin
-                })}>Logout</div>
-            </Menu.Item>
-        </Menu>
-    )}
-
-    const toggle = () => props.toggle()
-    let user = { name: "iwang"}
-        let side_width = !props.sider_icon ? 200 : 0
+    render() {
+        let user = this.props.auth.keycloak.tokenParsed
+        // let user = { name: "iwang"}
+        let side_width = !this.props.sider_icon ? 200 : 0
         let nav_width = window.innerWidth - side_width
-
-    
         return (
             <div style={{display:'flex'}}>
                 <Header
@@ -61,8 +44,8 @@ const AppHeader = (props) => {
                 >
                     <Row justify="space-between">
                         <Col span={12}>
-                            <div className="trigger" onClick={toggle}>
-                                {!props.sider_icon ? (
+                            <div className="trigger" onClick={this.toggle}>
+                                {!this.props.sider_icon ? (
                                     <MenuFoldOutlined />
                                 ) : (
                                     <MenuUnfoldOutlined />
@@ -74,7 +57,7 @@ const AppHeader = (props) => {
                             style={{ textAlign: 'right', paddingRight: 24 }}
                         >
                             <Avatar icon={<UserOutlined />} />
-                            <Dropdown overlay={user_menu(props.auth)}>
+                            <Dropdown overlay={user_menu(this.props.auth)}>
                                 <span
                                     onClick={e => e.preventDefault()}
                                 >
@@ -90,6 +73,7 @@ const AppHeader = (props) => {
                 </Header>
             </div>
         )
+    }
 }
 
 const mapStateToProps = state => {

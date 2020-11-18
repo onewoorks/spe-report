@@ -1,8 +1,10 @@
 {
-  "realm": "pengurusanemas.my",
+  "realm": "development",
   "auth-server-url": "https://sso.pengurusanemas.my/auth",
   "ssl-required": "external",
   "resource": "spe-stok",
-  "public-client": true,
+  "credentials": {
+    "secret": "a7c1fee3-00ff-493c-a616-b005da779faa"
+  },
   "confidential-port": 0
 }
