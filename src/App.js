@@ -43,11 +43,10 @@ const MainApps = (props) => {
     // }
      
     React.useEffect(() => {
-        // const keycloak = Keycloak('/keycloak.json')
         const keycloak = Keycloak({
             url: 'https://sso.pengurusanemas.my/auth/',
-            realm: 'development',
-            clientId: 'spe-stok',
+            realm: `${process.env.REACT_APP_SSO_REALM}`,
+            clientId: `${process.env.REACT_APP_KEYCLOAK_CLIENTID}`,
             "policy-enforcer": {
                 "enforcement-mode": "DISABLED"
               }
