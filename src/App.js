@@ -8,6 +8,7 @@ import './App.css'
 import axios from 'axios'
 import {Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+// import {useKeycloak } from '@react-keycloak/web'
 
 axios.defaults.headers.common['realm'] = 'development'
 
@@ -16,14 +17,24 @@ const routes = require('./routes')
 
 const MainApps = (props) => {
     const [auth, setAuth] = React.useState({})
-
+ 
     React.useEffect(() => {
-        const keycloak = Keycloak('/keycloak.json')
+        const keycloak = Keycloak({
+            url: 'https://sso.pengurusanemas.my/auth/',
+            realm: `${process.env.REACT_APP_SSO_REALM}`,
+            clientId: `${process.env.REACT_APP_KEYCLOAK_CLIENTID}`,
+            "policy-enforcer": {
+                "enforcement-mode": "DISABLED"
+              }
+          })
         keycloak
             .init({
                 onLoad: 'login-required',
                 promiseType: 'native',
-                checkLoginIframe: false
+                checkLoginIframe: false,
+                initOptions: {
+                    flow: 'implicit',
+              }
             })
             .then(authenticated => {
                 setAuth({

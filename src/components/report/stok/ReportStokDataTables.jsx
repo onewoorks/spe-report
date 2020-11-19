@@ -29,11 +29,11 @@ const ReportStokDataTables = (props) => {
     ]
 
     const columns_stok_buang = [
-        {title: 'Cawangan'},
-        {title: 'Tag'},
-        {title: 'Kuantiti'},
-        {title: 'Jumlah Berat Buang'},
-        {title: 'Jumlah Modal Buang'},
+        {title: 'Cawangan', dataIndex: 'lokasi_kedai'},
+        {title: 'Tag', dataIndex: 'nama_tag', align: 'center'},
+        {title: 'Kuantiti Buang', dataIndex: 'belum_jual',align: 'center'},
+        {title: 'Jumlah Berat Buang', dataIndex: 'modal_belum_jual', align: 'right'},
+        {title: 'Jumlah Modal Buang', dataIndex: 'modal_buang', align:'right'},
         {title: 'Tindakan'}
     ]
 
@@ -48,8 +48,8 @@ const ReportStokDataTables = (props) => {
     ]
 
     const columns_range = [
-        { title: 'Cawangan', dataIndex: 'kedai' },
-        { title: 'Tag', dataIndex: 'tag', align: 'center' },
+        { title: 'Cawangan', dataIndex: 'lokasi_kedai' },
+        { title: 'Tag', dataIndex: 'nama_tag', align: 'center' },
         {
             title: 'Total Item',
             dataIndex: 'total_item',
@@ -127,8 +127,8 @@ const ReportStokDataTables = (props) => {
     ]
 
     const columns = [
-        { key: 0, dataIndex: 'kedai', title: 'Cawangan' },
-        { key: 1, title: 'Tag', dataIndex: 'tag', align: 'center' },
+        { key: 0, dataIndex: 'lokasi_kedai', title: 'Cawangan' },
+        { key: 1, title: 'Tag', dataIndex: 'nama_tag', align: 'center' },
         {
             key: 2,
             title: 'Kuantiti Belum Jual',
@@ -204,6 +204,7 @@ const ReportStokDataTables = (props) => {
             )
         }
         if(['stok-buang'].includes(report)){
+            console.log(dataSource)
             table = (
                 <Table
                     dataSource={dataSource}

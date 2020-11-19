@@ -1,7 +1,6 @@
 import React from 'react'
 import { Checkbox, Row, Col, Tooltip, Divider } from 'antd'
 const AksesInventory = (props) => {
-    console.log(props.show)
     let cawangan = props.cawangan.split(',')
     let show = (props.show) ? 'block' : 'none'
     const SenaraiCawangan = () => {

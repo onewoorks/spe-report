@@ -10,21 +10,28 @@ const Dashboard = () => {
     const [tagPutih, setTagPutih] = React.useState(0)
     const [loading, setLoading] = React.useState(true)
 
-    const routes = [
-        {
-            path: 'index',
-            breadcrumbName: 'Overview',
-        },
-    ]
-
     React.useEffect(()=>{
         axios.post(`${process.env.REACT_APP_REPORT_URI}/statistik/stok-terkini-cawangan`,{})
         .then(response => {
            setDataTerkini(response.data)     
            setLoading(false)
+           KiraModal(response.data)
         })
     },[])
 
+    const KiraModal = (data) => {
+        let tag_kuning = 0
+        let tag_putih = 0
+        data.map((x)=>{
+            if(x.tag.toLowerCase() === 'putih')
+                tag_putih += x.jumlah
+            if(x.tag.toLowerCase() === 'kuning')
+                tag_kuning += x.jumlah
+            return true
+        })
+        setTagPutih(tag_putih)
+        setTagKuning(tag_kuning)
+    }
 
     const StatistikStok = () => {
         return (
@@ -60,7 +67,7 @@ const Dashboard = () => {
                     <Card>
                     <Statistic
                         title="Jumlah Stok Belum Jual"
-                        value={0}
+                        value={(tagPutih + tagKuning)}
                         precision={2}
                         valueStyle={{ color: '#3f8600' }}
                         prefix={'RM '}

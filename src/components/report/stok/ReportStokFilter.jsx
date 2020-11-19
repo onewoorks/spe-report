@@ -20,7 +20,7 @@ const ReportStokFilter = (props) => {
 
     React.useEffect(() => {
         axios
-            .get(`${process.env.REACT_APP_REPORT_URI}/cawangan`)
+            .get(`${process.env.REACT_APP_REPORT_URI}/ref/cawangan`)
             .then((data) => setCawangan(data.data))
     }, [])
 
@@ -98,8 +98,8 @@ const ReportStokFilter = (props) => {
                                     name="cawangan"
                                 >
                                     {cawangan.map((x, index) => (
-                                        <Option key={index} value={x}>
-                                            {x}
+                                        <Option key={index} value={x.value}>
+                                            {x.label}
                                         </Option>
                                     ))}
                                 </Select>

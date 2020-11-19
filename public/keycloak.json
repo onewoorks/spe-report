@@ -1,9 +1,0 @@
-{
-  "realm": "development",
-  "auth-server-url": "https://sso.pengurusanemas.my",
-  "resource": "spe-stok",
-  "verify-token-audience": true,
-  "credentials": {},
-  "confidential-port": 0,
-  "policy-enforcer": {}
-}
